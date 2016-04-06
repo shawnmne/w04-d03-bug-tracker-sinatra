@@ -43,3 +43,73 @@ get '/insects/:id' do
   erb :insects_show
 end
 
+#### Researchers
+
+# Index
+get '/researchers' do
+ @researchers = Researcher.all
+  erb :researchers_index
+end
+
+# New
+get '/researchers/new' do
+  @researcher = Researcher.new
+  erb :researchers_new
+end
+
+
+# Show
+get '/researchers/:id' do
+  @researcher = Researcher.find_by_id(params['id']) # nil or Insect object
+  erb :researchers_show
+end
+
+
+
+# Create
+post '/researchers' do
+  # create researcher object
+  @researcher = Researcher.new(params)
+
+  if @researcher.save
+    redirect to('/researchers')
+  else
+    erb :researchers_new
+  end
+end
+
+#### Locations
+
+
+# Index
+get '/locations' do
+ @locations = Location.all
+  erb :locations_index
+end
+
+# New
+get '/locations/new' do
+  @location = Location.new
+  erb :locations_new
+end
+
+
+# Show
+get '/locations/:id' do
+  @location = Location.find_by_id(params['id']) # nil or Insect object
+  erb :locations_show
+end
+
+
+
+# Create
+post '/locations' do
+  # create location object
+  @location = Location.new(params)
+
+  if @location.save
+    redirect to('/locations')
+  else
+    erb :locations_new
+  end
+end
